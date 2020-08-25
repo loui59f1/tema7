@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+
+	<script>
+		let timer = Math.round(Math.random() * 10);
+
+		co2Udledt = timer * 109;
+
+		if (co2Udledt < 100) {
+			console.log(`Du har fløjet ${timer} timer og udledt ${co2Udledt} kg Co2. Tæt på Thunberg.`);
+		} else if (co2Udledt > 100 && co2Udledt < 200) {
+			console.log(`Du har fløjet ${timer} timer og udledt ${co2Udledt} kg Co2. Ja ja, du behøver ikke melde dig ud af Å.`);
+		} else if (co2Udledt > 200 && co2Udledt < 600) {
+			console.log(`Du har fløjet ${timer} timer og udledt ${co2Udledt} kg Co2. Det er godt for turismen i Nordeuropa.`);
+		} else {
+			console.log(`Du har fløjet ${timer} timer og udledt ${co2Udledt} kg Co2. Nå ja, vi kan jo altid kolonisere en anden planet...`);
+		}
+
+	</script>
+
+</body>
+
+</html>
