@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		header {
+			text-align: center;
+			border-bottom: 1px solid #ebebeb;
+		}
+
+		main {
+			max-width: 1100px;
+			margin: 0 auto;
+		}
+
+		section h1 {
+			display: inline-block;
+		}
+
+		section {
+			display: flex;
+		}
+
+		article {
+			flex: 50%;
+			border: 1px solid #ebebeb;
+			padding: 30px;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		footer {
+			text-align: center;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<header>
+		<h1>Titel</h1>
+	</header>
+
+	<main>
+		<h2>Undertitel</h2>
+
+		<section>
+			<article>
+				<img src="https://placeimg.com/400/300/any" alt="">
+				<h3>Article 1</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est libero dolor, accusamus architecto alias rerum, sunt delectus magni ipsam quod inventore quae nobis suscipit nam ex maxime, quasi unde. Laudantium, modi sequi delectus eligendi ipsa dolorem expedita inventore magnam, voluptate magni sit fugiat obcaecati soluta quos nisi nostrum dolorum reiciendis nesciunt necessitatibus a corporis deserunt! Itaque consequuntur magnam repellat magni, delectus officiis exercitationem mollitia fugit eum cum culpa placeat odit vitae rem, non autem dolores nihil assumenda. Repudiandae officiis in atque nesciunt esse, explicabo! Qui labore, impedit repudiandae sequi ex. Reiciendis quas cupiditate quibusdam illo commodi, ullam voluptatem obcaecati nisi.</p>
+			</article>
+
+			<article>
+				<img src="https://placeimg.com/400/300/any" alt="">
+				<h3>Article 2</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci fuga quas officia at distinctio eaque unde. Quaerat ab iste a porro modi optio impedit, voluptatibus aliquam illum cupiditate similique necessitatibus itaque doloribus assumenda, pariatur fugiat eligendi aut eius reiciendis omnis veniam temporibus alias? Quaerat officiis quas officia pariatur, saepe sapiente minus numquam sint debitis tempore. Facilis fugit reiciendis ea nostrum voluptatum. Iste nobis minima accusantium inventore temporibus sit corrupti, quaerat doloribus. Nemo repellendus minima ea maiores eveniet tenetur ipsum nisi impedit iste. Fugiat dicta expedita nihil sed ea ipsa impedit quia quo eos, quam aperiam quos possimus laborum, neque voluptas!</p>
+			</article>
+		</section>
+
+	</main>
+
+	<footer>
+		<p>Dette er en footer</p>
+	</footer>
+
+	<script>
+		// Tager fat i h1 i header
+		const h1 = document.querySelector("h1");
+		console.log("H1");
+
+		// Tager fat i h2 under header
+		const h2 = document.querySelector("h2");
+		console.log("H2");
+
+		// Tager fat i billede i artikel 1
+		const firstImg = document.querySelector("article:nth-child(1) img");
+		console.log("First image");
+
+		// Tager fat i h3 i artikel 1
+		const firstH3 = document.querySelector("article:nth-child(1) h3");
+		console.log("First H3");
+
+		// Tager fat i p i artikel 1
+		const firstP = document.querySelector("article:nth-child(1) p");
+		console.log("First paragraph");
+
+		// Tager fat i billede i artikel 2
+		const secondImg = document.querySelector("article:nth-child(2) img");
+		console.log("Second image");
+
+		// Tager fat i h3 i artikel 2
+		const secondH3 = document.querySelector("article:nth-child(2) h3");
+		console.log("Second H3");
+
+		// Tager fat i p i artikel 2
+		const secondP = document.querySelector("article:nth-child(2) p");
+		console.log("Second paragraph");
+
+		// Tager fat i footer tekst
+		const footerText = document.querySelector("footer p");
+		console.log("Footer text");
+
+		// Skift tekst i H1 header
+		h1.textContent = "Dette er min første header";
+
+		// Skift tekst i den første artikels overskrift
+		firstH3.textContent = "Dette er første artikels overskrift";
+
+		// Skift tekst i den anden artikels overskrift
+		secondH3.innerHTML = "Dette er <i>anden</i> artikels overskrift";
+
+		// Skift tekst i p i artikel 1
+		firstP.textContent = "Her er teksten under første artikels billede og overskrift.";
+
+		// Skift tekst i p i artikel 2
+		secondP.innerHTML = "Her er teksten under <b>anden artikels</b> billede og overskrift.";
+
+		// Skift billede i artikel 1 og skift alt tekst
+		firstImg.src = "puppy.jpg";
+		firstImg.alt = "Dette er et billede af en hundehvalp";
+
+		// Skift billede i artikel 2 og skift alt tekst
+		secondImg.src = "puppy.jpg";
+		secondImg.alt = "Dette er et billede af en hundehvalp";
+
+		// Definer de nye elementer i variabler
+		let mainSection = document.querySelector("section");
+		let newArticle = document.createElement("article");
+		let newHeading = document.createElement("h3");
+		let newHeadingText = document.createTextNode("Artikel 3");
+		let newParagraph = document.createElement("p");
+		let newParagraphText = document.createTextNode("Her er tekst til artikel 3.");
+		let newImage = document.createElement("img");
+		newImage.src = "puppy.jpg";
+
+		// Indsæt nye elementer (først tekst i overskrift derefter overskrift til artikel og til slut artikel til mainsektionen - samme med img og paragraph)
+		mainSection.appendChild(newArticle);
+		newArticle.appendChild(newImage);
+		newHeading.appendChild(newHeadingText);
+		newArticle.appendChild(newHeading);
+		newParagraph.appendChild(newParagraphText);
+		newArticle.appendChild(newParagraph);
+
+	</script>
+
+</body>
+
+</html>
