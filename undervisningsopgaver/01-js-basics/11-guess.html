@@ -10,28 +10,42 @@
 
 <body>
 
-	<p>Hvad er længden på flyrejsen i timer?</p>
-	<input type="text" id="length">
-	<button>Udregn CO2 udledning</button>
+	<p>Gæt et tal mellem 0 og 20</p>
+	<input type="text" id="guess">
+	<button>Gæt</button>
+	<button id="newgame">Nyt spil</button>
 
 	<script>
-		document.querySelector("button").addEventListener("click", buttonClick)
+		let number = Math.round(Math.random() * 20);
+		let guess;
+		let antal = 1;
 
-		function buttonClick() {
-			let length = document.querySelector("#length").value;
-			let co2 = length * 109;
-			let resultat;
+		document.querySelector("button").addEventListener("click", guessNumber);
+		document.querySelector("#newgame").addEventListener("click", newGame);
+		document.querySelector("#newgame").style.visibility = "hidden";
 
-			if (isNaN(length)) {
-				resultat = "Det er ikke et tal, prøv igen!";
-			} else if (length <= 0) {
-				resultat = "Tallet er mindre end nul. Prøv igen!";
+
+		function guessNumber() {
+			guess = document.querySelector("#guess").value;
+
+			if (guess == number) {
+				console.log("Tillykke! Du gættede tallet efter " + antal + " forsøg!");
+
+				document.querySelector("#newgame").style.visibility = "visible";
+				document.querySelector("button").style.visibility = "hidden";
+
+			} else if (guess < number) {
+				console.log("Tallet er for lavt, prøv igen!");
+				antal++;
+
 			} else {
-				resultat = `Du har fløjet ${length} timer og udledt ${co2} kg CO2.`;
+				console.log("Tallet er for højt, prøv igen!");
+				antal++;
 			}
+		}
 
-			console.log(resultat);
-
+		function newGame() {
+			location.reload();
 		}
 
 	</script>
