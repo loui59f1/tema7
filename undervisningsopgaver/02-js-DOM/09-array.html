@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style>
+		body {
+			color: #000;
+		}
+
+		#display {
+			width: 20vw;
+			height: 20vw;
+			border: 1px solid silver;
+			margin: 7vw;
+			padding: 1vw;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<ul id="display">
+	</ul>
+
+	<script>
+		let playlist = ["Sang 1", "Sang 2", "Sang 3", "Sang 4", "Sang 5", "Sang 6", "Sang 7", "Sang 8", "Sang 9", "Sang 10"];
+		playlist.forEach(song => {
+			document.querySelector("#display").innerHTML += `${song} <br>`;
+		})
+
+	</script>
+</body>
+
+</html>
