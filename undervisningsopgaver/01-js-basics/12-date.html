@@ -19,11 +19,17 @@
 	<button>Se resultat</button>
 
 	<script>
-		document.querySelector("button").addEventListener("click", buttonClick);
+		document.addEventListener("DOMContentLoaded", start);
+
+		let firstAge = document.querySelector("#firstAge").value;
+		let secondAge = document.querySelector("#secondAge").value;
+
+		function start() {
+			document.querySelector("button").addEventListener("click", buttonClick);
+		}
 
 		function buttonClick() {
-			let firstAge = document.querySelector("#firstAge").value;
-			let secondAge = document.querySelector("#secondAge").value;
+			let ageResult = firstAge / 2 + 7;
 		}
 
 	</script>

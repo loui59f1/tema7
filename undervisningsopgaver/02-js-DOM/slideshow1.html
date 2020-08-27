@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Slideshow 1</title>
+	<style>
+		body {
+			color: #000;
+		}
+
+		#display {
+			width: 20vw;
+			height: 20vw;
+			border: 1px solid silver;
+			margin: 7vw;
+			padding: 1vw;
+		}
+
+	</style>
+
+</head>
+
+<body>
+	<h1>Tro på det...</h1>
+	<img src="img1.png" alt="">
+	<button>Videre</button>
+	<p>Billeder er venligst udlånt af Rasmus Bregnhøi</p>
+
+	<script>
+		// Lav en tæller
+		let number = 0;
+		// Lav variabel for billede
+		let img = document.querySelector("img");
+
+		// Opret array med billeder der skal vises
+		let images = ["img1.png", "img2.png", "img3.png", "img4.png", "img5.png", "img6.png", "img7.png", "img8.png"];
+		//Klik på button for at skifte billede (først definer variabel)
+		const button = document.querySelector("button");
+		button.addEventListener("click", changeImage);
+
+		// Funktion til at skifte billede
+		function changeImage() {
+			// Hvis billedet er < billeder (liste/array) så skal billedet skifte.
+			if (number < 7) {
+				// Tæl op
+				number++;
+				console.log(images[number]);
+				// Udskift billede
+				img.src = images[number];
+			}
+		}
+
+	</script>
+</body>
+
+</html>
