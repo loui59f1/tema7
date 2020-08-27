@@ -123,27 +123,29 @@
 		function redButtonClick() {
 			console.log("Red button clicked");
 
-			bold.classList.toggle("red");
+			bold.classList.remove("red", "blue", "yellow");
+			bold.classList.add("red");
 		}
 
 
 		function yellowButtonClick() {
 			console.log("Yellow button clicked");
 
-			bold.classList.toggle("yellow");
+			bold.classList.remove("red", "blue", "yellow");
+			bold.classList.add("yellow");
 		}
 
 
 		function blueButtonClick() {
 			console.log("Blue button clicked");
 
-			bold.classList.toggle("blue");
+			bold.classList.remove("red", "blue", "yellow");
+			bold.classList.add("blue");
 		}
 
 		function ballClick() {
 			console.log("Ball clicked");
-
-			bold.classList.remove("this");
+			bold.classList.remove("red", "blue", "yellow");
 		}
 
 	</script>
