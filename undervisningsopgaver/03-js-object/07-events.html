@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: sans-serif;
+		}
+
+		section {
+			margin: 0 auto;
+		}
+
+		article {
+			padding: 10px;
+		}
+
+		/* Mediaqueries */
+		@media only screen and (min-width: 768px) {
+			section {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: row;
+			}
+
+			article {
+				flex-basis: 300px;
+			}
+		}
+
+		@media only screen and (min-width: 1100px) {
+
+			article {
+				flex-basis: 500px;
+			}
+
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<section id="liste"></section>
+
+	<template>
+		<article>
+			<img src="" alt="">
+			<h3></h3>
+			<p></p>
+		</article>
+	</template>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", start);
+
+		// Lav object og udfyld properties for fem dyr her er array pga [] og , i mellem hvert object
+		let movies = [{
+			"navn": "A Calling",
+			"beskrivelse": "Christian Bengtson | Danmark | 20 min  | 2019",
+			"billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-360.jpg"
+		}, {
+			"navn": "A Hole In My Heart",
+			"beskrivelse": "Mees Peijnenburg | Holland | 9 min  | 2015",
+			"billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-360.jpg"
+		}, {
+			"navn": "A Place In The Sun",
+			"beskrivelse": "Christian Zipfel | Tyskland | 20 min  | 2018",
+			"billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck-360.jpg"
+		}, {
+			"navn": "A Tower Of Two",
+			"beskrivelse": "Jacob Krzysztof Glogowski | Danmark | 21 min  | 2019",
+			"billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd-360.jpg"
+		}, {
+			"navn": "A Worthy Man",
+			"beskrivelse": "Kristian Håskjold | Danmark | 19 min  | 2018",
+			"billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/2iUOgQpixgIQCxyLtY6KiYuU-360.jpg"
+		}];
+
+		function start() {
+			const list = document.querySelector("#liste");
+			const animalTemplate = document.querySelector("template");
+
+			// Løb dyr igennem og indsæt data i template
+			// Løb array liste igennem og skriv ud i section
+			movies.forEach(movies => {
+				let clone = animalTemplate.cloneNode(true).content;
+				clone.querySelector("h3").textContent = movies.navn;
+				clone.querySelector("p").textContent = movies.beskrivelse;
+				clone.querySelector("img").src = movies.billede;
+				list.appendChild(clone);
+			})
+
+		}
+
+	</script>
+
+</body>
+
+</html>
