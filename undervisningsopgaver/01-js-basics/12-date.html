@@ -1,39 +1,64 @@
 <!DOCTYPE html>
-<html lang="">
+<html>
 
 <head>
+	<title>test</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title></title>
-	<link rel="stylesheet" href="">
+
 </head>
 
 <body>
+	<div>
+		<p>Din alder</p>
 
-	<p>Hvad er din alder?</p>
-	<input type="text" id="firstAge">
+		<input type="text" id="dinAlderTxt">
 
-	<p>Hvad er din dates alder?</p>
-	<input type="text" id="secondAge">
+		<p>Din dates alder</p>
 
-	<button>Se resultat</button>
+		<input type="text" id="dinDatesAlderTxt">
+		<button>Tjek om alder passer</button>
+
+	</div>
+
 
 	<script>
-		document.addEventListener("DOMContentLoaded", start);
+		let min;
+		let max;
+		let dinAlder;
+		let datesAlder;
 
-		let firstAge = document.querySelector("#firstAge").value;
-		let secondAge = document.querySelector("#secondAge").value;
+		document.querySelector("button").addEventListener("click", button_clicked);
 
-		function start() {
-			document.querySelector("button").addEventListener("click", buttonClick);
-		}
+		function button_clicked() {
+			dinAlder = document.querySelector("#dinAlderTxt").value;
+			datesAlder = document.querySelector("#dinDatesAlderTxt").value;
+			//hvor ung skal din date mindst være?
+			min = Math.round(dinAlder / 2 + 7);
+			//hvor gammel må din date højst være?
+			max = Math.round((dinAlder - 7) * 2);
 
-		function buttonClick() {
-			let ageResult = firstAge / 2 + 7;
+
+			if (!Number(dinAlder) || dinAlder < 15 || !Number(datesAlder) || datesAlder < 15) {
+				//hvis bruger eller date er under den kriminelle lavalder, må de ikke bruge programmet
+				console.log("programmet er ikke for mindreårige");
+			} else { //1. mulighed: daten ligger inden for rammerne
+				if (datesAlder >= min && datesAlder <= max) {
+					console.log("Ok, det er passende");
+				} else if (datesAlder <= min) { //2. mulighed: date er for ung
+					console.log("Du er " + dinAlder + " og din date er " + datesAlder +
+						"\nDin date er " +
+						(min - datesAlder) + " år for ung");
+				} else if (datesAlder >= max) { //3. mulighed: date er for ung
+					console.log("Du er " + dinAlder + " og din date er " + datesAlder +
+						"\nDin date er " +
+						(datesAlder - max) + " år for gammel!");
+				}
+			}
+
 		}
 
 	</script>
-
 </body>
 
 </html>
