@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title></title>
 	<link rel="stylesheet" href="">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700;800;900&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 
 	<style>
 		body {
@@ -14,6 +15,23 @@
 			margin: 0 auto;
 			padding: 20px;
 			background-color: #f5f5f5;
+		}
+
+		h1 {
+			text-align: center;
+			font-size: 23px;
+			padding-bottom: 20px;
+			font-family: 'Poppins', sans-serif;
+			font-weight: 800;
+		}
+
+		h2 {
+			font-size: 20px;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		p {
+			font-family: 'Quicksand', sans-serif;
 		}
 
 		section {
@@ -32,20 +50,24 @@
 		article img {
 			width: 100%;
 		}
+
 	</style>
 
 </head>
 
 <body>
 
+	<h1>Persongalleri</h1>
 	<section id="liste"></section>
 
 	<template>
 		<article>
-			<h3></h3>
+			<h2></h2>
 			<img src="" alt="">
 			<p class="efternavn"></p>
 			<p class="hobby"></p>
+			<p class="job"></p>
+			<p class="land"></p>
 		</article>
 	</template>
 
@@ -67,15 +89,20 @@
 			// Løb array liste igennem og skriv ud i section
 			json.feed.entry.forEach(person => {
 				let clone = template.cloneNode(true).content;
-				clone.querySelector("h3").textContent = person.gsx$navn.$t;
-				clone.querySelector(".efternavn").textContent = person.gsx$efternavn.$t;
+				clone.querySelector("h2").textContent = person.gsx$navn.$t;
+				clone.querySelector("h2").textContent += " " + person.gsx$efternavn.$t;
 				clone.querySelector("img").src = person.gsx$billede.$t;
-				clone.querySelector(".hobby").textContent = person.gsx$hobby.$t;
+				clone.querySelector(".hobby").textContent = "Hobby: " + person.gsx$hobby.$t;
+				clone.querySelector(".job").textContent = "Job: " + person.gsx$job.$t;
+				clone.querySelector(".land").textContent = "Land: " + person.gsx$land.$t;
 				list.appendChild(clone);
 			})
 		}
 
 		hentdata();
+
 	</script>
 
-</body></html>
+</body>
+
+</html>
