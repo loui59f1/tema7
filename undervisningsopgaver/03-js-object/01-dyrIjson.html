@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+
+		article {
+			width: 50%;
+			border: 1px solid #000;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<section id="liste"></section>
+
+	<template>
+		<article>
+			<h3></h3>
+			<img src="" alt="">
+			<p class="type"></p>
+			<p class="levested"></p>
+		</article>
+	</template>
+
+	<script>
+		let list = document.querySelector("#liste");
+		let animalTemplate = document.querySelector("template");
+
+		async function hentdata() {
+			const respons = await fetch("dyr.json");
+			const json = await respons.json();
+			vis(json);
+		}
+
+		function vis(json) {
+			console.log(json);
+
+			// Løb array liste igennem og skriv ud i section
+			json.forEach(dyr => {
+				let clone = animalTemplate.cloneNode(true).content;
+				clone.querySelector("h3").textContent = dyr.navn;
+				clone.querySelector("img").src = dyr.billede;
+				clone.querySelector(".type").textContent = dyr.type;
+				clone.querySelector(".levested").textContent = dyr.levested;
+				list.appendChild(clone);
+			})
+		}
+
+		hentdata();
+	</script>
+
+</body></html>
