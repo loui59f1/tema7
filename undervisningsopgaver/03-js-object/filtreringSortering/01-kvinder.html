@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700;800;900&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+
+	<style>
+		body {
+			font-family: sans-serif;
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #f5f5f5;
+		}
+
+		header {
+			margin-bottom: 20px;
+			text-align: center;
+		}
+
+		h1 {
+			text-align: center;
+			font-size: 23px;
+			padding-bottom: 20px;
+			font-family: 'Poppins', sans-serif;
+			font-weight: 800;
+		}
+
+		h2 {
+			font-size: 20px;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		p {
+			font-family: 'Quicksand', sans-serif;
+		}
+
+		button {
+			font-family: 'Quicksand', sans-serif;
+			font-weight: 400;
+			border-radius: 12px;
+			padding: 5px 18px;
+			border: 1px solid #379630;
+			background-color: #379630;
+			color: #fff;
+		}
+
+		.active {
+			background-color: #37B230;
+			border: 1px solid #37B230;
+		}
+
+		section {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+			grid-gap: 1em;
+		}
+
+		article {
+			border: 1px solid #ebebeb;
+			box-shadow: 0px 0px 14px -4px rgba(199, 199, 199, 1);
+			padding: 20px;
+			background-color: #fff;
+		}
+
+		article img {
+			width: 100%;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<header>
+		<h1>Persongalleri</h1>
+		<button class="filter active" data-køn="alle">Alle</button>
+		<button class="filter" data-køn="m">Mænd</button>
+		<button class="filter" data-køn="k">Kvinder</button>
+		<button class="filter" data-køn="andet">Andet</button>
+	</header>
+
+	<section id="liste"></section>
+
+	<template>
+		<article>
+			<h2></h2>
+			<img src="" alt="">
+			<p class="efternavn"></p>
+			<p class="hobby"></p>
+			<p class="job"></p>
+			<p class="land"></p>
+		</article>
+	</template>
+
+	<script>
+		let personer;
+		let filer = "k";
+		let list = document.querySelector("#liste");
+		let template = document.querySelector("template");
+
+		const url = "https://spreadsheets.google.com/feeds/list/1mtHhpoEkYqVqr1TSnKQ1_sQZWI7FRVjcw3H1oatDOVQ/od6/public/values?alt=json";
+
+		async function hentdata() {
+			const respons = await fetch(url);
+			const json = await respons.json();
+			vis(json);
+		}
+
+		function vis(json) {
+			console.log(json);
+
+			// Løb array liste igennem og skriv ud i section
+			json.feed.entry.forEach(person => {
+				const clone = template.cloneNode(true).content;
+				clone.querySelector("h2").textContent = person.gsx$navn.$t;
+				clone.querySelector("h2").textContent += " " + person.gsx$efternavn.$t;
+				clone.querySelector("img").src = person.gsx$billede.$t;
+				clone.querySelector(".hobby").textContent = "Hobby: " + person.gsx$hobby.$t;
+				clone.querySelector(".job").textContent = "Job: " + person.gsx$job.$t;
+				clone.querySelector(".land").textContent = "Land: " + person.gsx$land.$t;
+				list.appendChild(clone);
+			})
+		}
+
+		hentdata();
+
+	</script>
+
+</body>
+
+</html>
