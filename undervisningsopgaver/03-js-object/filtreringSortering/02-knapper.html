@@ -18,7 +18,7 @@
 		}
 
 		header {
-			margin-bottom: 20px;
+			margin-bottom: 40px;
 			text-align: center;
 		}
 
@@ -47,6 +47,7 @@
 			border: 1px solid #379630;
 			background-color: #379630;
 			color: #fff;
+			margin-bottom: 8px;
 		}
 
 		.active {
@@ -79,13 +80,13 @@
 
 	<header>
 		<h1>Persongalleri</h1>
-		<button class="filter active" data-køn="alle">Alle</button>
+		<button class="filter" data-køn="alle">Alle</button>
 		<button class="filter" data-køn="m">Mænd</button>
-		<button class="filter" data-køn="k">Kvinder</button>
+		<button class="filter active" data-køn="k">Kvinder</button>
 		<button class="filter" data-køn="andet">Andet</button>
 	</header>
 
-	<h2 class="heading"></h2>
+	<h2 class="heading">Alle</h2>
 	<section id="liste"></section>
 
 	<template>
@@ -101,9 +102,7 @@
 
 	<script>
 		let personer;
-		let filter = "alle";
-		let list = document.querySelector("#liste");
-		let template = document.querySelector("template");
+		let filter = "k";
 		const url = "https://spreadsheets.google.com/feeds/list/1mtHhpoEkYqVqr1TSnKQ1_sQZWI7FRVjcw3H1oatDOVQ/od6/public/values?alt=json";
 
 		document.addEventListener("DOMContentLoaded", loadJSON);
@@ -116,12 +115,13 @@
 		}
 
 		function visPersoner() {
-			const clone = template.cloneNode(true).content;
+			const list = document.querySelector("#liste");
+			const template = document.querySelector("template");
 			list.innerHTML = "";
-
 			personer.feed.entry.forEach(person => {
-				if (filter == "alle" || filter == person.gsx$køn.$t) {
+				if (filter == "alle" || filter == person.gsx$køn.$t.toLowerCase()) {
 					console.log(person);
+					const clone = template.cloneNode(true).content;
 					clone.querySelector("h2").textContent = person.gsx$navn.$t;
 					clone.querySelector("h2").textContent += " " + person.gsx$efternavn.$t;
 					clone.querySelector("img").src = person.gsx$billede.$t;
@@ -141,6 +141,7 @@
 
 		function filterBtns() {
 			filter = this.dataset.køn;
+			document.querySelector(".heading").textContent = this.textContent;
 			visPersoner();
 		}
 
