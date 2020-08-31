@@ -101,35 +101,48 @@
 
 	<script>
 		let personer;
-		let filer = "k";
+		let filter = "alle";
 		let list = document.querySelector("#liste");
 		let template = document.querySelector("template");
-
 		const url = "https://spreadsheets.google.com/feeds/list/1mtHhpoEkYqVqr1TSnKQ1_sQZWI7FRVjcw3H1oatDOVQ/od6/public/values?alt=json";
 
-		async function hentdata() {
-			const respons = await fetch(url);
-			const json = await respons.json();
-			vis(json);
+		document.addEventListener("DOMContentLoaded", loadJSON);
+
+		async function loadJSON() {
+			const JSONData = await fetch(url);
+			personer = await JSONData.json();
+			addEventListenersToButtons();
+			visPersoner();
 		}
 
-		function vis(json) {
-			console.log(json);
+		function visPersoner() {
+			const clone = template.cloneNode(true).content;
+			list.innerHTML = "";
 
-			// Løb array liste igennem og skriv ud i section
-			json.feed.entry.forEach(person => {
-				const clone = template.cloneNode(true).content;
-				clone.querySelector("h2").textContent = person.gsx$navn.$t;
-				clone.querySelector("h2").textContent += " " + person.gsx$efternavn.$t;
-				clone.querySelector("img").src = person.gsx$billede.$t;
-				clone.querySelector(".hobby").textContent = "Hobby: " + person.gsx$hobby.$t;
-				clone.querySelector(".job").textContent = "Job: " + person.gsx$job.$t;
-				clone.querySelector(".land").textContent = "Land: " + person.gsx$land.$t;
-				list.appendChild(clone);
+			personer.feed.entry.forEach(person => {
+				if (filter == "alle" || filter == person.gsx$køn.$t) {
+					console.log(person);
+					clone.querySelector("h2").textContent = person.gsx$navn.$t;
+					clone.querySelector("h2").textContent += " " + person.gsx$efternavn.$t;
+					clone.querySelector("img").src = person.gsx$billede.$t;
+					clone.querySelector(".hobby").textContent = "Hobby: " + person.gsx$hobby.$t;
+					clone.querySelector(".job").textContent = "Job: " + person.gsx$job.$t;
+					clone.querySelector(".land").textContent = "Land: " + person.gsx$land.$t;
+					list.appendChild(clone);
+				}
 			})
 		}
 
-		hentdata();
+		function addEventListenersToButtons() {
+			document.querySelectorAll(".filter").forEach((btn) => {
+				btn.addEventListener("click", filterBtns);
+			})
+		}
+
+		function filterBtns() {
+			filter = this.dataset.køn;
+			visPersoner();
+		}
 
 	</script>
 
